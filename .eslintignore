@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+
+src-dpiref/test.ts
+src-drive/test.ts
+eslintrules
+karma.conf.js

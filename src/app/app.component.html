@@ -1,0 +1,19 @@
+<div class="toolbar" role="banner">
+    <img width="40" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="/>
+    <form *ngIf="searchForm$ | async as searchForm" [formGroup]="searchForm">
+        <mat-form-field appearance="outline">
+            <mat-label>User filter</mat-label>
+            <input matInput type="text" autocomplete="off" formControlName="search" />
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="content" role="main">
+    <app-master *ngIf="masterDetailsService.users$ | async as users" class="master" [users]="users" (selectUser$)="selectUser($event)"></app-master>
+    <ng-container *ngIf="masterDetailsService.selectedUser$ | async as selectedUser; else nouserselected">
+        <app-details class="details" [user]="selectedUser"></app-details>
+    </ng-container>
+    <ng-template #nouserselected>
+        <div class="no-user-selected">Veuillez sélectionner un utilisateur dans la liste.</div>
+    </ng-template>
+</div>

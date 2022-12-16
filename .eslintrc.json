@@ -1,0 +1,11 @@
+{
+    "root": true,
+    "extends": [
+        "@hug/eslint-config/recommended"
+    ],
+    "overrides": [{
+        "files": [
+            "src/**/*.ts"
+        ]
+    }]
+}
