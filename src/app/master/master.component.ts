@@ -11,16 +11,19 @@ import { UserBase } from '../users.service';
 })
 export class MasterComponent {
     @Input()
-    public users!: ReadonlyArray<UserBase>;
+    public userList!: ReadonlyArray<UserBase>;
+
+    @Input()
+    public selectedUserId?: number | null;
 
     @Output()
-    public readonly selectUser$: Observable<number | undefined>;
+    public readonly selectedUserId$: Observable<number | undefined>;
 
-    protected selectUser$$ = new Subject<number | undefined>();
+    protected selectUserId$ = new Subject<number | undefined>();
 
     public constructor() {
 
-        this.selectUser$ = this.selectUser$$.pipe(
+        this.selectedUserId$ = this.selectUserId$.pipe(
             debounceTime(100)
         );
     }

@@ -1,5 +1,5 @@
 <mat-selection-list multiple="false">
-    <mat-list-option *ngFor="let user of users" (click)="selectUser$$.next(user.id)">
+    <mat-list-option *ngFor="let user of userList" (click)="selectUserId$.next(user.id)" [selected]="selectedUserId===user.id">
         {{ user.firstName }} {{ user.lastName }}
     </mat-list-option>
 </mat-selection-list>

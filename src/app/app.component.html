@@ -9,7 +9,7 @@
 </div>
 
 <div class="content" role="main">
-    <app-master *ngIf="masterDetailsService.users$ | async as users" class="master" [users]="users" (selectUser$)="selectUser($event)"></app-master>
+    <app-master *ngIf="masterDetailsService.userList$ | async as userList" class="master" [userList]="userList" (selectedUserId$)="selectUserId($event)"></app-master>
     <ng-container *ngIf="masterDetailsService.selectedUser$ | async as selectedUser; else nouserselected">
         <app-details class="details" [user]="selectedUser"></app-details>
     </ng-container>

@@ -9,12 +9,12 @@ export class MasterDetailsService {
     public search$ = new BehaviorSubject<string>('');
     public selectedUser$: Observable<User | undefined>;
 
-    public users$: Observable<ReadonlyArray<UserBase>>;
+    public userList$: Observable<ReadonlyArray<UserBase>>;
 
     private userCache = new Map<number, Observable<User | undefined>>;
 
     public constructor(private userService: UserService) {
-        this.users$ = userService.getUsers$().pipe(
+        this.userList$ = userService.getUsers$().pipe(
             combineLatestWith(this.search$),
             map(([users, search]) => users.filter(user => {
                 if (!search) {

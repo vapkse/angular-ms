@@ -36,9 +36,11 @@ export class AppComponent extends Destroy {
             debounceTime(20),
             map(params => {
                 const queryParams = params as QueryParams;
+
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const userId = queryParams.userid;
                 this.masterDetailsService.selectUserId$.next(userId && !isNaN(+userId) && +userId || undefined);
+
 
                 const formGroup = new FormGroup<SearchFormControls>({
                     search: new FormControl(queryParams.search || '', { nonNullable: true })
@@ -60,7 +62,7 @@ export class AppComponent extends Destroy {
         });
     }
 
-    protected selectUser(userId: number | undefined): void {
+    protected selectUserId(userId: number | undefined): void {
         const queryParams = { userid: userId || undefined };
         void this.router.navigate([], { relativeTo: this.route, queryParams, queryParamsHandling: 'merge' });
     }
