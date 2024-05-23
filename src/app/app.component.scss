@@ -49,13 +49,13 @@
         overflow: hidden;
 
         .master {
-            flex: 1 1 30%;
+            flex: 1 1 auto;
             overflow: auto;
         }
 
-        .details,
-        .no-user-selected {
-            flex: 1 1 70%;
+        app-details,
+        app-no-selection {
+            flex: 1 1 75%;
             overflow: auto;
         }
 

@@ -4,16 +4,12 @@
         <mat-form-field appearance="outline">
             <mat-label>User filter</mat-label>
             <input matInput type="text" autocomplete="off" formControlName="search" />
+            <mat-error *ngIf="searchForm.controls.search.hasError('pasCool')">Pas cool is not a name</mat-error>
         </mat-form-field>
     </form>
 </div>
 
 <div class="content" role="main">
-    <app-master *ngIf="masterDetailsService.userList$ | async as userList" class="master" [userList]="userList" (selectedUserId$)="selectUserId($event)"></app-master>
-    <ng-container *ngIf="masterDetailsService.selectedUser$ | async as selectedUser; else nouserselected">
-        <app-details class="details" [user]="selectedUser"></app-details>
-    </ng-container>
-    <ng-template #nouserselected>
-        <div class="no-user-selected">Veuillez sélectionner un utilisateur dans la liste.</div>
-    </ng-template>
+    <app-master *ngIf="userList$ | async as userList" class="master" [userList]="userList" (selectedUserId$)="selectUserId($event)"></app-master>
+    <router-outlet></router-outlet>
 </div>

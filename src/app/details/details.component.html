@@ -1,19 +1,23 @@
-<img *ngIf="user.image" [src]="user.image">
-<div *ngIf="user.maidenName">maidenName: {{ user.maidenName }}</div>
-<div *ngIf="user.age">age: {{ user.age }}</div>
-<div *ngIf="user.gender">gender: {{ user.gender }}</div>
-<div *ngIf="user.email">email: {{ user.email }}</div>
-<div *ngIf="user.phone">phone: {{ user.phone }}</div>
-<div *ngIf="user.username">username: {{ user.username }}</div>
-<div *ngIf="user.password">password: {{ user.password }}</div>
-<div *ngIf="user.birthDate">birthDate: {{ user.birthDate }}</div>
-<div *ngIf="user.bloodGroup">bloodGroup: {{ user.bloodGroup }}</div>
-<div *ngIf="user.height">height: {{ user.height }}</div>
-<div *ngIf="user.weight">weight: {{ user.weight }}</div>
-<div *ngIf="user.eyeColor">eyeColor: {{ user.eyeColor }}</div>
-<div *ngIf="user.domain">domain: {{ user.domain }}</div>
-<div *ngIf="user.ip">ip: {{ user.ip }}</div>
-<div *ngIf="user.macAddress">macAddress: {{ user.macAddress }}</div>
-<div *ngIf="user.university">university: {{ user.university }}</div>
-<div *ngIf="user.ein">ein: {{ user.ein }}</div>
-<div *ngIf="user.ssn">ssn: {{ user.ssn }}</div>
+<ng-container *ngIf="user$ | async as user; else nouser">
+    <img *ngIf="user.image" [src]="user.image">
+    <div *ngIf="user.maidenName">maidenName: {{ user.maidenName }}</div>
+    <div *ngIf="user.age">age: {{ user.age }}</div>
+    <div *ngIf="user.gender">gender: {{ user.gender }}</div>
+    <div *ngIf="user.email">email: {{ user.email }}</div>
+    <div *ngIf="user.phone">phone: {{ user.phone }}</div>
+    <div *ngIf="user.username">username: {{ user.username }}</div>
+    <div *ngIf="user.password">password: {{ user.password }}</div>
+    <div *ngIf="user.birthDate">birthDate: {{ user.birthDate }}</div>
+    <div *ngIf="user.bloodGroup">bloodGroup: {{ user.bloodGroup }}</div>
+    <div *ngIf="user.height">height: {{ user.height }}</div>
+    <div *ngIf="user.weight">weight: {{ user.weight }}</div>
+    <div *ngIf="user.eyeColor">eyeColor: {{ user.eyeColor }}</div>
+    <div *ngIf="user.domain">domain: {{ user.domain }}</div>
+    <div *ngIf="user.ip">ip: {{ user.ip }}</div>
+    <div *ngIf="user.macAddress">macAddress: {{ user.macAddress }}</div>
+    <div *ngIf="user.university">university: {{ user.university }}</div>
+    <div *ngIf="user.ein">ein: {{ user.ein }}</div>
+    <div *ngIf="user.ssn">ssn: {{ user.ssn }}</div>
+</ng-container>
+<ng-template #nouser>
+</ng-template>

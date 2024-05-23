@@ -89,7 +89,14 @@ export class UserService {
 
     public getUsers$(): Observable<ReadonlyArray<UserBase>> {
         return this.httpClient.get<{ users: Array<Record<string, unknown>> }>('https://dummyjson.com/users').pipe(
-            map(json => json ? ObjectMapper.deserializeArray(UserBase, json.users) : new Array<UserBase>())
+            map(json => json ? ObjectMapper.deserializeArray(UserBase, json.users) : new Array<UserBase>()),
+            map(users => {
+                const pasCoolUser = new UserBase();
+                pasCoolUser.id = 999;
+                pasCoolUser.firstName = 'Pas';
+                pasCoolUser.lastName = 'Cool';
+                return [...users, pasCoolUser];
+            })
         );
     }
 

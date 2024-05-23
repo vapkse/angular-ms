@@ -1,31 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatestWith, map, Observable, of, ReplaySubject, shareReplay, switchMap } from 'rxjs';
+import { Observable, of, ReplaySubject, shareReplay, switchMap } from 'rxjs';
 
-import { User, UserBase, UserService } from './users.service';
+import { User, UserService } from './users.service';
 
 @Injectable()
-export class MasterDetailsService {
+export class DetailService {
     public selectUserId$ = new ReplaySubject<number | undefined>(1);
-    public search$ = new BehaviorSubject<string>('');
     public selectedUser$: Observable<User | undefined>;
-
-    public userList$: Observable<ReadonlyArray<UserBase>>;
 
     private userCache = new Map<number, Observable<User | undefined>>;
 
     public constructor(private userService: UserService) {
-        this.userList$ = userService.getUsers$().pipe(
-            combineLatestWith(this.search$),
-            map(([users, search]) => users.filter(user => {
-                if (!search) {
-                    return users;
-                }
-                const rg = new RegExp(search, 'ig');
-                return rg.test(`${user.firstName || ''} ${user.lastName || ''}`);
-            })),
-            shareReplay({ bufferSize: 1, refCount: true })
-        );
-
         this.selectedUser$ = this.selectUserId$.pipe(
             switchMap(selectUserId => selectUserId ? this.getUser$(selectUserId) : of(undefined)),
             shareReplay({ bufferSize: 1, refCount: true })
@@ -42,5 +27,3 @@ export class MasterDetailsService {
         return cached$;
     }
 }
-
-

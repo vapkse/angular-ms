@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## TODO
+Comment ça marche (workflow)
+Splitter (Flex layout)
+Recherche (biding)
+Alignement de la recherche (CSS+debug)
+Selection au clavier
+Validation Pas Cool (Reactive form)
+Gestion d'erreur Pas Cool (rxJs)

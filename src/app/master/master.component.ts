@@ -1,4 +1,6 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
+import { MatListModule } from '@angular/material/list';
 import { debounceTime, Observable, Subject } from 'rxjs';
 
 import { UserBase } from '../users.service';
@@ -7,7 +9,12 @@ import { UserBase } from '../users.service';
     selector: 'app-master',
     templateUrl: './master.component.html',
     styleUrls: ['./master.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatListModule,
+        NgFor
+    ]
 })
 export class MasterComponent {
     @Input()
@@ -22,7 +29,6 @@ export class MasterComponent {
     protected selectUserId$ = new Subject<number | undefined>();
 
     public constructor() {
-
         this.selectedUserId$ = this.selectUserId$.pipe(
             debounceTime(100)
         );

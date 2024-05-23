@@ -5,12 +5,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { DetailsModule } from './details/details.module';
-import { MasterModule } from './master/master.module';
-import { MasterDetailsService } from './master-details.service';
+import { DetailsComponent } from './details/details.component';
+import { MasterComponent } from './master/master.component';
+import { NoUserComponent } from './no-user/no-user.component';
+
+export const routes: Routes = [
+    { path: '', component: NoUserComponent },
+    { path: ':id', component: DetailsComponent },
+    { path: '**', redirectTo: '' }
+];
 
 @NgModule({
     declarations: [
@@ -19,16 +25,12 @@ import { MasterDetailsService } from './master-details.service';
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        DetailsModule,
         HttpClientModule,
-        MasterModule,
-        RouterModule.forRoot([]),
+        MasterComponent,
+        RouterModule.forRoot(routes),
         MatFormFieldModule,
         MatInputModule,
         ReactiveFormsModule
-    ],
-    providers: [
-        MasterDetailsService
     ],
     bootstrap: [AppComponent]
 })
