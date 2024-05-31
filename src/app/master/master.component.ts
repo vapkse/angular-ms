@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { debounceTime, Observable, Subject } from 'rxjs';
@@ -12,8 +11,7 @@ import { UserBase } from '../users.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        MatListModule,
-        NgFor
+        MatListModule
     ]
 })
 export class MasterComponent {

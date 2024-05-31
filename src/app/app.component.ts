@@ -1,10 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Destroy } from '@deja-js/component/core';
-import { combineLatestWith, debounceTime, map, Observable, shareReplay, switchMap, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { combineLatestWith, debounceTime, map, Observable, shareReplay, switchMap } from 'rxjs';
 
 import { DetailService } from './detail.service';
+import { MasterComponent } from './master/master.component';
 import { UserBase, UserService } from './users.service';
 
 interface SearchFormControls {
@@ -15,13 +19,22 @@ interface SearchFormControls {
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [
+        AsyncPipe,
+        MasterComponent,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        RouterModule
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         DetailService
     ]
 })
-export class AppComponent extends Destroy {
+export class AppComponent {
     protected title = 'angular-ms';
     protected searchForm$: Observable<FormGroup<SearchFormControls>>;
 
@@ -33,7 +46,6 @@ export class AppComponent extends Destroy {
     private route = inject(ActivatedRoute);
 
     public constructor() {
-        super();
 
         this.userList$ = this.userService.getUsers$().pipe(
             shareReplay({ bufferSize: 1, refCount: true })
@@ -78,7 +90,7 @@ export class AppComponent extends Destroy {
             switchMap(searchForm => searchForm.controls.search.valueChanges.pipe(
                 debounceTime(300)
             )),
-            takeUntil(this.destroyed$)
+            takeUntilDestroyed()
         ).subscribe(search => {
             const queryParams = { search };
             void this.router.navigate([], { relativeTo: this.route, queryParams, queryParamsHandling: 'merge' });
