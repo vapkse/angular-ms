@@ -1,23 +1,21 @@
-<ng-container *ngIf="user$ | async as user; else nouser">
-    <img *ngIf="user.image" [src]="user.image">
-    <div *ngIf="user.maidenName">maidenName: {{ user.maidenName }}</div>
-    <div *ngIf="user.age">age: {{ user.age }}</div>
-    <div *ngIf="user.gender">gender: {{ user.gender }}</div>
-    <div *ngIf="user.email">email: {{ user.email }}</div>
-    <div *ngIf="user.phone">phone: {{ user.phone }}</div>
-    <div *ngIf="user.username">username: {{ user.username }}</div>
-    <div *ngIf="user.password">password: {{ user.password }}</div>
-    <div *ngIf="user.birthDate">birthDate: {{ user.birthDate }}</div>
-    <div *ngIf="user.bloodGroup">bloodGroup: {{ user.bloodGroup }}</div>
-    <div *ngIf="user.height">height: {{ user.height }}</div>
-    <div *ngIf="user.weight">weight: {{ user.weight }}</div>
-    <div *ngIf="user.eyeColor">eyeColor: {{ user.eyeColor }}</div>
-    <div *ngIf="user.domain">domain: {{ user.domain }}</div>
-    <div *ngIf="user.ip">ip: {{ user.ip }}</div>
-    <div *ngIf="user.macAddress">macAddress: {{ user.macAddress }}</div>
-    <div *ngIf="user.university">university: {{ user.university }}</div>
-    <div *ngIf="user.ein">ein: {{ user.ein }}</div>
-    <div *ngIf="user.ssn">ssn: {{ user.ssn }}</div>
-</ng-container>
-<ng-template #nouser>
-</ng-template>
+@if (user$ | async; as user) {
+    @if (user.image) { <img [src]="user.image"> }
+    @if (user.maidenName) { <div>maidenName: {{ user.maidenName }}</div> }
+    @if (user.age) { <div>age: {{ user.age }}</div> }
+    @if (user.gender) { <div>gender: {{ user.gender }}</div> }
+    @if (user.email) { <div>email: {{ user.email }}</div> }
+    @if (user.phone) { <div>phone: {{ user.phone }}</div> }
+    @if (user.username) { <div>username: {{ user.username }}</div> }
+    @if (user.password) { <div>password: {{ user.password }}</div> }
+    @if (user.birthDate) { <div>birthDate: {{ user.birthDate }}</div> }
+    @if (user.bloodGroup) { <div>bloodGroup: {{ user.bloodGroup }}</div> }
+    @if (user.height) { <div>height: {{ user.height }}</div> }
+    @if (user.weight) { <div>weight: {{ user.weight }}</div> }
+    @if (user.eyeColor) { <div>eyeColor: {{ user.eyeColor }}</div> }
+    @if (user.domain) { <div>domain: {{ user.domain }}</div> }
+    @if (user.ip) { <div>ip: {{ user.ip }}</div> }
+    @if (user.macAddress) { <div>macAddress: {{ user.macAddress }}</div> }
+    @if (user.university) { <div>university: {{ user.university }}</div> }
+    @if (user.ein) { <div>ein: {{ user.ein }}</div> }
+    @if (user.ssn) { <div>ssn: {{ user.ssn }}</div> }
+}
